@@ -1,4 +1,4 @@
-#include "InfraRoodSensor.h"
+#include "ZumoInfraRoodSensor.h"
 
 InfraRoodSensor::InfraRoodSensor() {
     proximitySensors.initFrontSensor();
