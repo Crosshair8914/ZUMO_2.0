@@ -15,7 +15,7 @@ void ZumoGyroHandler::setup() {
 float ZumoGyroHandler::printGyroYGrade() {
     imuHandler->readGyro();  // Only read gyro, not accel/mag (faster)
 
-    int16_t gyroYraw = imuHandler->gyro.y;
+    int16_t gyroYraw = imuHandler-> g.y;
 
     float gy = gyroYraw * 0.0175f - gyroYOffset;
 
