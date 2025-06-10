@@ -13,4 +13,11 @@ public:
     void alertLowVoltage();
 };
 
+class Test {
+    public:
+    int test1;
+    bool test4;
+    void testFunction();
+};
+
 #endif
