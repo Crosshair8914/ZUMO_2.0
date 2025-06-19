@@ -8,6 +8,6 @@ void LineSensor::detectLine() {
     lineSensors.read(lineSensorValues);
 }
 
-const uint16_t* LineSensor::getSensorValues() const {
+const unsigned* LineSensor::getSensorValues() const {
     return lineSensorValues;
 }
