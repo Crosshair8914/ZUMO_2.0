@@ -4,18 +4,11 @@
 #include <Zumo32U4.h>
 
 class MotorController {
-private:
-    Zumo32U4Motors* motors;
-    int baseSpeed;
-
 public:
-    MotorController(Zumo32U4Motors* m, int speed = 150);
+    int baseSpeed = 150;
+    int turnSpeed = 100;
 
-    void driveForward();
+    void setSpeeds(int leftSpeed, int rightSpeed);
     void stop();
-    void turnLeft();
-    void turnRight();
-    void setSpeed(int speed); // optional runtime speed change
 };
-
-#endif // MOTORCONTROLLER_H
+#endif

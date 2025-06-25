@@ -4,14 +4,11 @@
 #include <Zumo32U4.h>
 
 class LineSensor {
-private:
+public:
     Zumo32U4LineSensors lineSensors;
     uint16_t lineSensorValues[5];
 
-public:
-    LineSensor();
+    void init();
     void detectLine();
-    const uint16_t* getSensorValues() const;
 };
-
-#endif // LINESENSOR_H
+#endif

@@ -1,29 +1,19 @@
 #ifndef SENSORCONTROLLER_H
 #define SENSORCONTROLLER_H
 
-#include "ZumoGyroHandler.h"
 #include "LineSensor.h"
-#include "ZumoInfraRoodSensor.h"
 
 class SensorController {
-private:
-    ZumoGyroHandler* gyro;
-    LineSensor* lineSensor;
-    InfraRoodSensor* irSensor;
-
-    // Cached sensor values
-    float hoekY;
-    uint16_t lineValues[3];
-    uint16_t irValues[2];
-
 public:
-    SensorController(ZumoGyroHandler* g, LineSensor* l, InfraRoodSensor* ir);
+    float Kp = 0.2;
+    float Kd = 5.0;
+    float Ki = 0.0;
 
-    void updateSensorData();
+    int16_t lastError = 0;
+    int32_t integral = 0;
 
-    float getHoekY() const;
-    const uint16_t* getLineValues() const;
-    const uint16_t* getIrValues() const;
+    SensorController();
+    int computeCorrection(LineSensor& sensor);
 };
 
 #endif // SENSORCONTROLLER_H
