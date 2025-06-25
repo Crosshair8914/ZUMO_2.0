@@ -5,16 +5,22 @@
 
 class ZumoGyroHandler {
 private:
-    Zumo32U4IMU* imuHandler;
-    float hoekY;
-    unsigned long vorigeMillis;
-    float gyroYOffset;
+    Zumo32U4IMU imu;
+    int16_t xOffset = 0;
+    int16_t yOffset = 0;
+    int16_t zOffset = 0;
 
 public:
-    ZumoGyroHandler(Zumo32U4IMU* imu, float offset = 0.0f);
+    // Initialiseer IMU en kalibreer
+    void begin();
 
-    void setup();  // Call this once in your main setup()
-    float printGyroYGrade();  // Call this repeatedly in loop()
+    // Meet en print gyro-waardes 
+    void update();
+
+    // Ophalen van de offsetwaarden 
+    int16_t getXOffset() const;
+    int16_t getYOffset() const;
+    int16_t getZOffset() const;
 };
 
 #endif // ZUMOGYROHANDLER_H
