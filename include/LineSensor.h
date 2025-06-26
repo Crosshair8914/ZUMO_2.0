@@ -1,18 +1,20 @@
-#ifndef LINESENSOR_H
-#define LINESENSOR_H
-
+#include <Wire.h>
 #include <Zumo32U4.h>
 
 class LineSensor {
-public:
+private:
     Zumo32U4LineSensors lineSensors;
-    unsigned lineSensorValues[5];
+    uint16_t lineSensorValues[5];
 
     void init();
     void detectLine();
-<<<<<<< HEAD
-=======
-    const unsigned* getSensorValues() const;
->>>>>>> d1c696791e23c6e169d3d7f244dd208daa0b7221
+    const int baseSpeed = 750;
+const int maxSpeed = 1000;
+
+// Increase this value to turn more aggressively
+const float customKp = 0.55;  // Previously 0.05
+
+uint16_t lineSensorValues[5];
+
+
 };
-#endif
