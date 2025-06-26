@@ -1,19 +1,34 @@
-#include "ZumoInfraRoodSensor.h"
-
-InfraRoodSensor::InfraRoodSensor() {
-    proximitySensors.initFrontSensor();
-    proxValues[0] = 0;
-    proxValues[1] = 0;
+#include "InfraRoodSensor.h"
+void setup()
+{
+  proxSensors.initThreeSensors();   // Activeer front-, links- en rechtsensor
 }
 
-void InfraRoodSensor::detectObstacle() {
-    proximitySensors.read(); // reads all proximity values
+void loop()
+{
+  proxSensors.read();  // Lees IR-sensorwaarden
 
-    // Store left and right front sensor readings
-    proxValues[0] = proximitySensors.countsLeftWithLeftLeds();
-    proxValues[1] = proximitySensors.countsRightWithRightLeds();
-}
+  uint16_t front = proxSensors.countsFrontWithRightLeds();
 
-const uint16_t* InfraRoodSensor::getProximityValues() const {
-    return proxValues;
+  if (front > proximityThreshold)
+  {
+    // Obstakel gezien → draai
+    if (draaiLinks)
+      motors.setSpeeds(-turnSpeed, turnSpeed); // draai linksom
+    else
+      motors.setSpeeds(turnSpeed, -turnSpeed); // draai rechtsom
+
+    delay(turnDuration); // draai even
+
+    motors.setSpeeds(0, 0); // korte pauze na draaien
+    delay(100);
+
+    draaiLinks = !draaiLinks; // wissel draaikant
+  }
+  else
+  {
+    motors.setSpeeds(motorSpeed, motorSpeed); // vooruit
+  }
+
+  delay(20); // korte pauze voor stabiliteit
 }
