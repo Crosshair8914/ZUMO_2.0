@@ -1,17 +1,11 @@
-#ifndef INFRAROODSENSOR_H
-#define INFRAROODSENSOR_H
-
+#include <Wire.h>
 #include <Zumo32U4.h>
 
-class InfraRoodSensor {
-private:
-    Zumo32U4ProximitySensors proximitySensors;
-    uint16_t proxValues[2]; // 0 = left, 1 = right
+Zumo32U4Motors motors;
+Zumo32U4ProximitySensors proxSensors;
 
-public:
-    InfraRoodSensor();
-    void detectObstacle();
-    const uint16_t* getProximityValues() const;
-};
-
-#endif // INFRAROODSENSOR_H
+const int motorSpeed = 400;         // Vooruitrijsnelheid
+const int turnSpeed = 400;          // Draaisnelheid
+const int turnDuration = 500;       // Duur van draai (~90°)
+const int proximityThreshold = 2;   // Hoe gevoelig de detectie is
+bool draaiLinks = true;             // Afwisselend links/rechts draaien
